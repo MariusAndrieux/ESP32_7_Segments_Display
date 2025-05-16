@@ -1,58 +1,48 @@
-# ESP32 - Affichage 7 Segments et Lecture Potentiomètre
+# ESP32 - 7-Segment Display & Potentiometer with ADC
 
-Ce projet a pour objectif de démontrer l'utilisation d'un **afficheur 7 segments 4 digits** et d'un **potentiomètre** sur une carte **ESP32**, en utilisant **FreeRTOS**. Il s'agit d'un exemple d'apprentissage de l'ESP-IDF (framework officiel d'ESP32).
+This project demonstrates how to use a **4-digit 7-segment display** combined with a **potentiometer** and a **push button**, all controlled by an **ESP32** using **FreeRTOS**.
 
-## 🎯 Objectifs pédagogiques
+## 🧠 Educational Purpose
 
-- Contrôler un afficheur 7 segments (4 chiffres).
-- Lire la valeur d’un potentiomètre via l’ADC.
-- Gérer un bouton poussoir avec effet d'appui.
-- Créer des tâches FreeRTOS pour séparer les responsabilités.
-
----
-
-## ⚙️ Matériel utilisé
-
-- ESP32 DevKit (ou équivalent)
-- Afficheur 7 segments à 4 chiffres (multiplexé)
-- Potentiomètre (connecté à une entrée analogique)
-- Bouton poussoir (pull-up interne)
-- LED (intégrée ou externe, reliée à GPIO 2)
+- Dynamically display a value on a 7-segment display.
+- Read an analog value using the **ADC** (Analog-to-Digital Converter).
+- Handle a **push button with debouncing** to increment a counter.
+- Use **FreeRTOS tasks** to manage these functions in parallel.
 
 ---
 
-## 📌 Fonctionnalités
+## 🔧 Required Hardware
 
-### 🖥️ Affichage
-- L’afficheur affiche le nombre **1234** de manière constante.
-- L’intensité de l’affichage est contrôlée en temps réel par un **potentiomètre** (ADC).
-
-### 🔘 Bouton
-- Un bouton poussoir est lu via une tâche dédiée.
-- Chaque appui incrémente un compteur affiché dans les logs (ESP_LOGI).
-- Une **LED** reflète l’état du bouton (ON quand bouton relâché, OFF quand appuyé).
+- ESP32 DevKit
+- 4-digit 7-segment display 3461BS-1 (manually wired)
+- B10K Potentiometer
+- Push button
+- LED (integrated)
+- Jumper wires, breadboard
 
 ---
 
-## 🧪 Détails techniques
+## ⚙️ How It Works
 
-- Le **potentiomètre** est connecté au canal ADC1_CHANNEL_6 (GPIO34 par défaut).
-- Le **bouton poussoir** est connecté au GPIO32.
-- La **LED** est connectée au GPIO2.
-- Utilisation d’une **tâche FreeRTOS par fonctionnalité** :
-  - `display_task` : mise à jour de l'affichage.
-  - `button_task` : lecture du bouton et contrôle LED.
-- Le fichier `display.h` doit contenir les fonctions :
-  - `display_init()`
-  - `display_set_value(int value, int brightness)`
+- When the **push button** is pressed, a counter is incremented.
+- This counter is displayed on the **4-digit display**.
+- The **potentiometer** controls the **brightness of the display** (or another variable via the ADC).
+- An **LED** reflects the button state (on = not pressed, off = pressed).
 
 ---
 
-## 🚀 Démarrage rapide
+## 🗂️ Code Structure
 
-1. Cloner le dépôt.
-2. Ajouter/implémenter les fonctions dans `display.h/.c` selon le matériel utilisé.
-3. Compiler et flasher avec l’ESP-IDF :
+| File          | Role |
+|---------------|------|
+| `main.c`      | Contains the main application logic |
+| `display.h` / `display.c` | Handles the 7-segment display |
+
+---
+
+## 🚀 Quick Start
+
+1. Clone this repository
+2. Flash the program:
    ```bash
-   idf.py build
-   idf.py flash monitor
+   platformio run
