@@ -42,7 +42,7 @@ This project demonstrates how to use a **4-digit 7-segment display** combined wi
 
 ## 📷 Aperçu
 
-![1000021258](https://github.com/user-attachments/assets/34c6a88e-ba9f-4614-91bb-4f9c0918be46)
+<img src="https://github.com/user-attachments/assets/34c6a88e-ba9f-4614-91bb-4f9c0918be46" alt="1000021258" width="500"/>
 
 ---
 ## 🚀 Quick Start
